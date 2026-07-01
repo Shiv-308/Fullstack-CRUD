@@ -18,13 +18,17 @@ async function getUserById(req, res) {
 
 async function getAllUsers(req, res) {
     const users = await User.find();
-    res.status(200).json(users);
+    res.status(200).json(users);    
 }
 
 async function deleteUser(req, res) {
     const { email } = req.params;
+    console.log('Delete request for email:', email);
     const user = await User.findOneAndDelete({ email });
-    res.status(200).json(user);
+    if (!user) {
+        return res.status(404).json({ message: 'User not found', email });
+    }
+    res.status(200).json({ message: 'User deleted successfully', user });
 }
 
 async function updateUser(req, res) {

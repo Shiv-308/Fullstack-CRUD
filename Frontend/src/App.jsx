@@ -1,28 +1,25 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import Home from './components/Home'
+import AddUser from './components/AddUser'
+import EditUser from './components/EditUser'
+import GetAll from './components/GetAll'
+import DeleteUser from './components/DeleteUser'
+import GetUser from './components/GetUser'
+
 const App = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    axios.post('http://localhost:5000/users/create', {
-      name,
-      email,
-      password
-    })
-  }
-
   return (
-    <div className='container'>
-      <form action="" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <Router>
+      <Home />
+      <Routes>
+        <Route path="/addUser" element={<AddUser />} />
+        <Route path="/editUser" element={<EditUser />} />
+        <Route path="/getAll" element={<GetAll />} />
+        <Route path="/deleteUser" element={<DeleteUser />} />
+        <Route path="/getUser" element={<GetUser />} />
+      </Routes>
+    </Router>
   )
 }
 
