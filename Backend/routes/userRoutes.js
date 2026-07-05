@@ -3,7 +3,7 @@ import { createNewUser, getUserById, getAllUsers, deleteUser, updateUser } from 
 const router = express.Router();
 
 router.post("/create", createNewUser);
-router.get("/get/:id", getUserById);
+router.get("/get/:email", getUserById);
 router.get("/getAll", getAllUsers);
 router.delete("/delete/:email", deleteUser);
 router.put("/update/:email", updateUser);
